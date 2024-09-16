@@ -27,6 +27,16 @@ DEBUG = 'true'
 
 A Route 53 domain and Hosted Zone ID is required for this deployment. These will be used to start the service.
 
+## Quick Start
+
+```sh
+# might need to use a different authentication mechanism
+aws configure sso
+yarn
+yarn build
+yarn deploy
+```
+
 ### AWS Fargate Service
 
 This deployment uses an AWS Fargate service to deploy two containers - the Minecraft server and a watchdog server. The Minecraft server is the reason for deploying this and will be used to play the game. The watchdog container is used to ensure that the Minecraft server is still being used.

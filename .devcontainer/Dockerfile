@@ -10,6 +10,14 @@ RUN (type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y
     && sudo apt update \
     && sudo apt install gh -y
 
+# Install AWS CLI
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+    && unzip awscliv2.zip \
+    && sudo ./aws/install \
+    && rm awscliv2.zip
+
+RUN npm install -g aws-cdk
+
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"
 # [Option] Upgrade OS packages to their latest versions
@@ -41,16 +49,8 @@ RUN apt-get update \
 
 VOLUME [ "/var/lib/docker" ]
 
-# Setting the ENTRYPOINT to docker-init.sh will start up the Docker Engine 
-# inside the container "overrideCommand": false is set in devcontainer.json. 
-# The script will also execute CMD if you need to alter startup behaviors.
-ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
-CMD [ "sleep", "infinity" ]
-
-# Install AWS CLI
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
-    && unzip awscliv2.zip \
-    && sudo ./aws/install \
-    && rm awscliv2.zip
-
-RUN npm install -g aws-cdk
+# # Setting the ENTRYPOINT to docker-init.sh will start up the Docker Engine 
+# # inside the container "overrideCommand": false is set in devcontainer.json. 
+# # The script will also execute CMD if you need to alter startup behaviors.
+# ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
+# CMD [ "sleep", "infinity" ]

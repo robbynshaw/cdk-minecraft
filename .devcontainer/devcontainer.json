@@ -7,16 +7,16 @@
 
   "features": {
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
-      "version": "${templateOption:dockerVersion}",
-      "enableNonRootDocker": "${templateOption:enableNonRootDocker}",
-      "moby": "${templateOption:moby}"
+      "version": "latest",
+      "enableNonRootDocker": true,
+      "moby": true
     }
-  },
+  }
 
   // Use this environment variable if you need to bind mount your local source code into a new container.
-  "remoteEnv": {
-    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
-  }
+  //   "remoteEnv": {
+  //     "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  //   }
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],

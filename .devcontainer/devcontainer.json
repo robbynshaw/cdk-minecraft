@@ -10,8 +10,8 @@
       "version": "latest",
       "enableNonRootDocker": true,
       "moby": true
-    },
-    "ghcr.io/devcontainers/features/aws-cli:1": {}
+    }
+    // "ghcr.io/devcontainers/features/aws-cli:1": {}
   }
 
   // Use this environment variable if you need to bind mount your local source code into a new container.

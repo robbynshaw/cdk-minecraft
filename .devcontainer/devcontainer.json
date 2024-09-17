@@ -1,16 +1,15 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-in-docker
 {
   "name": "Docker in Docker",
-  "dockerFile": "Dockerfile",
-  // "runArgs": ["--init", "--privileged"],
-  // "mounts": ["source=dind-var-lib-docker,target=/var/lib/docker,type=volume"],
-  // "overrideCommand": false,
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "image": "mcr.microsoft.com/devcontainers/base:bullseye",
 
-  // Configure tool-specific properties.
-  "customizations": {
-    // Configure properties specific to VS Code.
-    "vscode": {
-      // Add the IDs of extensions you want installed when the container is created.
-      "extensions": ["ms-azuretools.vscode-docker"]
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "${templateOption:dockerVersion}",
+      "enableNonRootDocker": "${templateOption:enableNonRootDocker}",
+      "moby": "${templateOption:moby}"
     }
   }
 
@@ -20,6 +19,9 @@
   // Use 'postCreateCommand' to run commands after the container is created.
   // "postCreateCommand": "docker --version",
 
-  // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-  // "remoteUser": "vscode"
+  // Configure tool-specific properties.
+  // "customizations": {},
+
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
 }

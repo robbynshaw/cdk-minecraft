@@ -30,8 +30,12 @@ A Route 53 domain and Hosted Zone ID is required for this deployment. These will
 ## Quick Start
 
 ```sh
+# if using devpod on a remote host, make sure you run this so that it
+# doesn't make a docker credentials helper that can't be reached
+devpod context set-options default -o SSH_INJECT_DOCKER_CREDENTIALS=false
 # might need to use a different authentication mechanism
-aws configure sso
+aws configure
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 024902228242.dkr.ecr.us-east-1.amazonaws.com
 yarn
 yarn build
 yarn deploy

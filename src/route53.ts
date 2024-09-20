@@ -1,7 +1,7 @@
-import { RemovalPolicy, Duration } from 'aws-cdk-lib';
+import { Duration, RemovalPolicy } from 'aws-cdk-lib';
 import { PolicyStatement, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
 import { LogGroup, ResourcePolicy, RetentionDays } from 'aws-cdk-lib/aws-logs';
-import { HostedZone, ARecord, NsRecord } from 'aws-cdk-lib/aws-route53';
+import { ARecord, HostedZone, NsRecord } from 'aws-cdk-lib/aws-route53';
 import { Construct } from 'constructs';
 
 interface Route53ResourcesProps {

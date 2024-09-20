@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/indent */
 import path from 'path';
 import { RemovalPolicy } from 'aws-cdk-lib';
-import { SubnetType, Vpc, SecurityGroup } from 'aws-cdk-lib/aws-ec2';
+import { SecurityGroup, SubnetType, Vpc } from 'aws-cdk-lib/aws-ec2';
 import {
   AwsLogDriver,
   Cluster,
@@ -13,16 +13,17 @@ import {
 } from 'aws-cdk-lib/aws-ecs';
 import { AccessPoint, FileSystem } from 'aws-cdk-lib/aws-efs';
 import {
-  Role,
   Policy,
   PolicyDocument,
   PolicyStatement,
+  Role,
   ServicePrincipal,
 } from 'aws-cdk-lib/aws-iam';
 import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { Topic } from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
 import { ServerConfig } from './minecraft';
+import { MinecraftSettings } from './minecraft-settings';
 
 interface ECSResourcesProps {
   vpc: Vpc;
@@ -86,6 +87,10 @@ export class ECSResources extends Construct {
                 'elasticfilesystem:DescribeFileSystems',
               ],
             }),
+            new PolicyStatement({
+              actions: ['ecs:DescribeTasks'],
+              resources: ['*'],
+            }),
           ],
         }),
       },
@@ -96,7 +101,7 @@ export class ECSResources extends Construct {
       cpu: Number(props.cpuSize),
       runtimePlatform: {
         operatingSystemFamily: OperatingSystemFamily.LINUX,
-        cpuArchitecture: CpuArchitecture.ARM64,
+        cpuArchitecture: CpuArchitecture.X86_64,
       },
       taskRole: minecraftTaskRole,
       volumes: [
@@ -135,10 +140,11 @@ export class ECSResources extends Construct {
     const minecraftServerContainer = this.task.addContainer(
       'MinecraftServerContainer',
       {
-        image: ContainerImage.fromRegistry(props.serverConfig.image),
+        image: ContainerImage.fromAsset(
+          path.resolve(__dirname, './resources/minecraftContainer'),
+        ),
         environment: {
-          EULA: 'TRUE',
-          MEMORY: '8G',
+          ...MinecraftSettings.environment,
         },
         portMappings: [
           {
@@ -150,9 +156,9 @@ export class ECSResources extends Construct {
         essential: false,
         logging: props.serverConfig.debug
           ? new AwsLogDriver({
-              logRetention: RetentionDays.THREE_DAYS,
-              streamPrefix: 'minecraft',
-            })
+            logRetention: RetentionDays.THREE_DAYS,
+            streamPrefix: 'minecraft',
+          })
           : undefined,
       },
     );
@@ -179,9 +185,9 @@ export class ECSResources extends Construct {
       },
       logging: props.serverConfig.debug
         ? new AwsLogDriver({
-            logRetention: RetentionDays.THREE_DAYS,
-            streamPrefix: 'minecraft',
-          })
+          logRetention: RetentionDays.THREE_DAYS,
+          streamPrefix: 'minecraft',
+        })
         : undefined,
     });
 

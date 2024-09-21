@@ -3,5 +3,6 @@ export const MinecraftSettings = {
     EULA: 'TRUE',
     MEMORY: '8G',
     TYPE: 'PURPUR',
+    OPS: 'LaughingSteer',
   },
 };

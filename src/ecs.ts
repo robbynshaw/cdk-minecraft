@@ -10,6 +10,7 @@ import {
   FargateService,
   FargateTaskDefinition,
   OperatingSystemFamily,
+  Protocol,
 } from 'aws-cdk-lib/aws-ecs';
 import { AccessPoint, FileSystem } from 'aws-cdk-lib/aws-efs';
 import {
@@ -151,6 +152,12 @@ export class ECSResources extends Construct {
             containerPort: props.serverConfig.port,
             hostPort: props.serverConfig.port,
             protocol: props.serverConfig.protocol,
+          },
+          {
+            // Geyser port mapping
+            containerPort: 19132,
+            hostPort: 19132,
+            protocol: Protocol.UDP,
           },
         ],
         essential: false,

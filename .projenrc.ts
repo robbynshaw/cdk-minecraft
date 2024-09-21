@@ -38,6 +38,10 @@ const common_exclude = [
   '.env',
 ];
 
+// project.addTask('pre:build', {
+//   exec: './'
+// })
+
 project.addTask('launch', {
   exec: 'yarn && yarn projen && yarn build && yarn cdk bootstrap && yarn cdk deploy',
 });

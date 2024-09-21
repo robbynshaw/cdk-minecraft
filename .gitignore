@@ -54,5 +54,3 @@ dependabot.yml
 .DS_Store
 .env
 !/.projenrc.ts
-
-src/resources/minecraftContainer/plugins

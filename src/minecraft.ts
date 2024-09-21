@@ -1,16 +1,16 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { App, Stack, StackProps } from 'aws-cdk-lib';
-import { Port } from 'aws-cdk-lib/aws-ec2';
+import { Peer, Port } from 'aws-cdk-lib/aws-ec2';
 import { Protocol } from 'aws-cdk-lib/aws-ecs';
 import { Topic } from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
 import { config } from 'dotenv';
 import {
-  VPCResources,
   ECSResources,
-  SNSResources,
-  Route53Resources,
   LambdaResources,
+  Route53Resources,
+  SNSResources,
+  VPCResources,
 } from './';
 
 config();
@@ -63,6 +63,8 @@ export class Minecraft extends Stack {
     const vpcResources = new VPCResources(this, 'VPCResources', {
       ingressRule: serverConfig.ingressRule,
     });
+
+    vpcResources.securityGroup.addIngressRule(Peer.anyIpv4(), Port.udp(19132), 'Allow Bedrock/Geyser connections');
 
     let snsTopic: Topic;
 

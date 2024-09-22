@@ -5,6 +5,7 @@ import { Protocol } from 'aws-cdk-lib/aws-ecs';
 import { Topic } from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
 import { config } from 'dotenv';
+import { resolve } from 'node:path';
 import {
   ECSResources,
   LambdaResources,
@@ -12,6 +13,7 @@ import {
   SNSResources,
   VPCResources,
 } from './';
+import { StaticWebsite } from './static-site';
 
 config();
 
@@ -103,6 +105,13 @@ export class Minecraft extends Stack {
       service: ecsResources.service,
       serverSubDomain: props.serverSubDomain,
       domain: props.domain,
+    });
+
+    new StaticWebsite(this, 'MinecraftSite', {
+      websiteSourcePath: resolve(__dirname, './resources/site/html'),
+      subdomain: 'shawrealm',
+      domainName: props.domain,
+      hostedZoneId: props.hostedZoneId,
     });
   }
 }

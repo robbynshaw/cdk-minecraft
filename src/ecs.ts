@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/indent */
-import path from 'path';
 import { RemovalPolicy } from 'aws-cdk-lib';
 import { SecurityGroup, SubnetType, Vpc } from 'aws-cdk-lib/aws-ec2';
 import {
@@ -23,6 +22,7 @@ import {
 import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { Topic } from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
+import path from 'path';
 import { ServerConfig } from './minecraft';
 import { MinecraftSettings } from './minecraft-settings';
 

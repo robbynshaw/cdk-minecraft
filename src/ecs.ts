@@ -40,6 +40,7 @@ interface ECSResourcesProps {
   shutdownMin: string;
   serverConfig: ServerConfig;
   subDomainHostedZoneId: string;
+  geyser: boolean;
 }
 
 export class ECSResources extends Construct {
@@ -89,7 +90,7 @@ export class ECSResources extends Construct {
               ],
             }),
             new PolicyStatement({
-              actions: ['ecs:DescribeTasks'],
+              actions: ['ecs:DescribeTasks', 'ecs:ListTasks'],
               resources: ['*'],
             }),
           ],
@@ -189,6 +190,7 @@ export class ECSResources extends Construct {
         SNSTOPIC: props.snsTopic?.topicArn || '',
         STARTUPMIN: props.startupMin,
         SHUTDOWNMIN: props.shutdownMin,
+        GEYSER: props.geyser ? 'TRUE' : 'FALSE',
       },
       logging: props.serverConfig.debug
         ? new AwsLogDriver({

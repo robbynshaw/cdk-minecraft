@@ -1,0 +1,25 @@
+{
+  "name": "watchdogContainer",
+  "version": "1.0.0",
+  "description": "watches for changes in the minecraft container",
+  "main": "dist/src/index.js",
+  "author": "robbynshaw@gmail.com",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@aws-sdk/client-ec2": "^3.654.0",
+    "@aws-sdk/client-ecs": "^3.654.0",
+    "@aws-sdk/client-route-53": "^3.654.0",
+    "aws-sdk": "^2.1691.0",
+    "axios": "^1.7.7",
+    "node-netstat": "^1.9.0"
+  },
+  "devDependencies": {
+    "@types/node-netstat": "^1.8.4",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.2"
+  },
+  "scripts": {
+    "build": "npx tsc"
+  }
+}

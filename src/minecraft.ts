@@ -13,12 +13,14 @@ import {
   SNSResources,
   VPCResources,
 } from './';
+import { MinecraftSettings } from './minecraft-settings';
 import { StaticWebsite } from './static-site';
 
 config();
 
 interface MinecraftProps extends StackProps {
   minecraftEdition: string;
+  geyser: boolean;
   serverSubDomain: string;
   domain: string;
   hostedZoneId: string;
@@ -97,6 +99,7 @@ export class Minecraft extends Stack {
       startupMin: props.startupMin,
       shutdownMin: props.shutdownMin,
       serverConfig: serverConfig,
+      geyser: props.geyser,
     });
 
     new LambdaResources(this, 'LambdaResources', {
@@ -139,6 +142,7 @@ const stackProps = {
 
 new Minecraft(app, 'Minecraft', {
   ...stackProps,
+  geyser: MinecraftSettings.geyser,
   env: devEnv,
 });
 

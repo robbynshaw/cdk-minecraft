@@ -1,13 +1,13 @@
 import { Stack } from 'aws-cdk-lib';
 import { Cluster, FargateService } from 'aws-cdk-lib/aws-ecs';
 import {
-  Role,
-  ServicePrincipal,
   ManagedPolicy,
   PolicyDocument,
   PolicyStatement,
+  Role,
+  ServicePrincipal,
 } from 'aws-cdk-lib/aws-iam';
-import { Function, Code, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { Code, Function, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { FilterPattern, LogGroup, RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { LambdaDestination } from 'aws-cdk-lib/aws-logs-destinations';
 import { Construct } from 'constructs';
@@ -51,8 +51,8 @@ export class LambdaResources extends Construct {
     const launcherLambda = new Function(this, 'LauncherLambda', {
       code: Code.fromAsset('src/resources/lambda'),
       role: lambdaRole,
-      handler: 'index.lambda_handler',
-      runtime: Runtime.PYTHON_3_9,
+      handler: 'index.handler',
+      runtime: Runtime.NODEJS_20_X,
       logRetention: RetentionDays.ONE_WEEK,
       environment: {
         REGION: Stack.of(this).region,

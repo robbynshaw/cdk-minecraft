@@ -1,8 +1,11 @@
-FROM amazon/aws-cli
+FROM node:22
 
-RUN yum install -y net-tools jq nmap-ncat && \
-    yum clean all
+COPY package.json .
+COPY yarn.lock .
+RUN yarn
 
-COPY ./watchdog.sh .
-RUN chmod +x ./watchdog.sh
-ENTRYPOINT ["./watchdog.sh"]
+COPY tsconfig.json .
+COPY ./src ./src
+RUN yarn build
+
+CMD [ "node", "dist/index.js" ]

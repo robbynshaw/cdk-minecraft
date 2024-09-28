@@ -1,11 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import { resolve } from 'node:path';
 import { App, Stack, StackProps } from 'aws-cdk-lib';
 import { Peer, Port } from 'aws-cdk-lib/aws-ec2';
 import { Protocol } from 'aws-cdk-lib/aws-ecs';
 import { Topic } from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
 import { config } from 'dotenv';
-import { resolve } from 'node:path';
 import {
   ECSResources,
   LambdaResources,

@@ -1,10 +1,10 @@
+import * as path from 'path';
 import { CfnOutput, RemovalPolicy } from 'aws-cdk-lib';
 import { ARecord, HostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
 import { BucketWebsiteTarget } from 'aws-cdk-lib/aws-route53-targets';
 import { BlockPublicAccess, Bucket } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
-import * as path from 'path';
 
 interface StaticWebsiteProps {
   websiteSourcePath: string; // Path to your local website files

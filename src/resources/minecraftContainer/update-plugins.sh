@@ -20,5 +20,8 @@ curl -L -o $PLUGIN_DIR/LuckPerms.jar \
 curl -L -o $PLUGIN_DIR/EssentialsX.jar \
     https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsX-2.20.1.jar
 
-# curl -L -o $PLUGIN_DIR/SmoothTimber.jar \
-#     https://www.spigotmc.org/resources/smoothtimber.39965/download?version=556726
+curl -L -o $PLUGIN_DIR/SmoothTimber.jar \
+    https://www.spigotmc.org/resources/smoothtimber.39965/download?version=556726
+
+curl -L -o $PLUGIN_DIR/AwsNotifier.jar \
+    https://github.com/robbynshaw/mc-aws-notifier/releases/download/v1.1.0/aws-notifier-1.1.0-all.jar

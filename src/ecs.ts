@@ -147,6 +147,9 @@ export class ECSResources extends Construct {
         ),
         environment: {
           ...MinecraftSettings.environment,
+          SHUTDOWN_TIMEOUT_MINUTES: '10',
+          CLUSTER_NAME: this.cluster.clusterArn,
+          SERVICE_ARN: this.service.serviceArn,
         },
         portMappings: [
           {
